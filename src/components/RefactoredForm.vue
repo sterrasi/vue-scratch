@@ -1,10 +1,8 @@
 <template>
   <ValidationObserver ref="observer">
     <b-form
-      slot-scope="{
-        validate
-      }"
-      @submit.prevent="validate().then(onSubmit);"
+      slot-scope="{ validate }"
+      @submit.prevent="validate().then(onSubmit)"
       @reset="resetForm"
     >
       <BTextInputWithValidation
@@ -43,7 +41,8 @@
         label="Subject:"
         v-model="subject"
       >
-        <option value="null">None</option> <option value="S1">Subject 1</option>
+        <option value="null">None</option>
+        <option value="S1">Subject 1</option>
         <option value="S2">Subject 2</option>
       </BSelectWithValidation>
 
@@ -71,19 +70,20 @@ export default {
     ValidationObserver,
     BTextInputWithValidation,
     BSelectWithValidation,
-    BCheckboxesWithValidation
+    BCheckboxesWithValidation,
   },
   data: () => ({
     email: "",
     password: "",
     confirmation: "",
     subject: "",
-    choices: []
+    choices: [],
   }),
   watch: {
     subject(val) {
+      console.log("subject changed in form: " + val);
       console.log(val);
-    }
+    },
   },
   methods: {
     onSubmit() {
@@ -98,7 +98,7 @@ export default {
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
-    }
-  }
+    },
+  },
 };
 </script>
